@@ -17,6 +17,7 @@ function ShowCard(props: { data: Shows }) {
 					<h2>{show.name}</h2>
 					<span>{show.runtime}</span>
 				</div>
+				<div dangerouslySetInnerHTML={{ __html: show.summary }}></div>
 			</div>
 		</div>
 	);
