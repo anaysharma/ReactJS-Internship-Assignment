@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Show from './components/show';
+
+import App from './App.tsx';
+import Show from './components/show.tsx';
 import BookForm from './components/bookForm';
+
+import './global.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
