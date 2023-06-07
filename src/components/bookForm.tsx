@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ShowTypes } from '../types/showDetails';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
-type formDataState = {
+export type formDataState = {
 	showName: string;
 	note: string;
 	showId: number | null;
@@ -31,6 +31,7 @@ function BookForm() {
 				setData(data);
 				setFormData({
 					...formData,
+					showName: data.name,
 					showId: data.id,
 				});
 			})
@@ -56,6 +57,7 @@ function BookForm() {
 			...formData,
 			showName: val,
 		});
+		console.log(val);
 	};
 
 	const setNote = (val: string) => {
@@ -68,20 +70,22 @@ function BookForm() {
 	return (
 		<div className="absolute inset-0 grid place-items-center bg-slate-100/75">
 			<div className="bg-white rounded-lg border shadow-xl p-6 w-96">
-				<h2 className="text-3xl font-bold">Book your show</h2>
-				<form className="todo" onSubmit={handleFormSubmit}>
-					<div className="wrapper">
+				<h2 className="text-3xl font-bold mb-5">Book your show</h2>
+				<form className="flex flex-col gap-6" onSubmit={handleFormSubmit}>
+					<div className="">
 						<label htmlFor="title">Show Title</label>
 						<input
+							className="p-2 border rounded w-full"
 							type="text"
 							id="title"
-							value={data?.name}
+							value={formData.showName}
 							onInput={(e) => setTitle((e.target as HTMLInputElement).value)}
 						/>
 					</div>
-					<div className="wrapper">
+					<div>
 						<label htmlFor="note">add note</label>
 						<input
+							className="p-2 border rounded w-full"
 							type="text"
 							id="note"
 							value={formData.note}
@@ -90,11 +94,16 @@ function BookForm() {
 							onInput={(e) => setNote((e.target as HTMLInputElement).value)}
 						/>
 					</div>
-					<div>
-						<button className="btn" aria-label="Add show" type="submit">
+					<div className="flex justify-between">
+						<button
+							className="bg-blue-600 text-white px-4 py-2 rounded"
+							aria-label="Add show"
+							type="submit"
+						>
 							Submit
 						</button>
 						<button
+							className="bg-slate-100 rounded px-4 py-2 border"
 							onClick={() => navigate(-1)}
 							arial-label="cancel"
 							type="button"

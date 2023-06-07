@@ -27,7 +27,7 @@ function Show() {
 
 	return (
 		<>
-			<div className="container flex p-6">
+			<div className="container flex p-6 mt-14">
 				<div className="bg-white rounded-lg p-4 border max-w-full">
 					<img className="h-96 rounded shadow-lg" src={data?.image.original} />
 					<div className="mt-4 flex flex-col gap-2">

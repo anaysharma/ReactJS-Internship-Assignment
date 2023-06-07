@@ -21,7 +21,7 @@ function App() {
 
 	return (
 		<>
-			<div className="container p-6 grid grid-cols-4 gap-4">
+			<div className="container p-6 grid grid-cols-4 gap-4 mt-14">
 				{shows.map((item) => (
 					<ShowCard key={item.show.id} data={item} />
 				))}
