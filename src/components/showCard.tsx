@@ -24,7 +24,12 @@ function ShowCard(props: { data: Shows }) {
 						<Badge key={`sdfa${idx}genre`} name={genre} />
 					))}
 				</div>
-				<Button name="More Info" url={`/show/${show.id}`} type="primary" />
+				<Button
+					name="More Info"
+					path={`/show/${show.id}`}
+					type="primary"
+					url={show._links.self.href}
+				/>
 			</div>
 		</div>
 	);

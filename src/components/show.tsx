@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
 import { ShowTypes } from '../types/showDetails';
@@ -7,11 +7,12 @@ import Button from './ui/button';
 
 function Show() {
 	const location = useLocation();
-	const showId = location.pathname.split('/').pop();
+	const { url } = location.state;
 	const [data, setData] = useState<ShowTypes>();
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetch(`https://api.tvmaze.com/shows/${showId}`)
+		fetch(url)
 			.then((response) => {
 				if (response.ok) {
 					return response.json();
@@ -22,7 +23,7 @@ function Show() {
 				setData(data);
 			})
 			.catch(console.error);
-	}, [showId]);
+	}, [url]);
 
 	return (
 		<>
@@ -53,11 +54,13 @@ function Show() {
 							)}
 							{data?.rating.average && (
 								<span className="text-2xl bg-slate-200 px-4 rounded py-1">
-									{data?.rating.average}/10
+									{data?.rating.average} / 10
 								</span>
 							)}
 						</div>
-						<Button name="✕" url="/" type="secondary" />
+						<button type="button" onClick={() => navigate(-1)}>
+							✖
+						</button>
 					</div>
 					<div>
 						<div className="flex items-center gap-2 mt-4">
@@ -77,7 +80,8 @@ function Show() {
 						<Button
 							name="Book now"
 							type="primary"
-							url={`${location.pathname}/book`}
+							path={`${location.pathname}/book`}
+							url={url}
 						/>
 					</div>
 					<div className="border rounded-md p-4 flex flex-col gap-2 bg-slate-50 mt-6">

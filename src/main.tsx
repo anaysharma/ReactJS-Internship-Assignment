@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />} />
-				<Route path="/show/:showId" element={<Show />}>
+				<Route path="/show/:showId" Component={(props) => <Show {...props} />}>
 					<Route path="book" element={<BookForm />} />
 				</Route>
 			</Routes>
